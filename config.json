@@ -1,0 +1,6 @@
+{
+  "dbUrl": "192.168.1.2",
+  "dbName": "TruckMonitor",
+  "dbUserName":"postgres",
+  "dbUserPassword": "postgres"
+}
