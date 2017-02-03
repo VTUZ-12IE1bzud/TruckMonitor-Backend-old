@@ -8,24 +8,25 @@ import (
 
 /** Конфигурация приложения. */
 type AppConfiguration struct {
-	DataBaseUrl      string    `json:"dbUrl"`
-	DataBaseName     string    `json:"dbName"`
-	DataBaseUser     string    `json:"dbUserName"`
-	DataBasePassword string    `json:"dbUserPassword"`
+	DBUrl      string    `json:"dbUrl"`
+	DBName     string    `json:"dbName"`
+	DBUser     string    `json:"dbUserName"`
+	DBPassword string    `json:"dbUserPassword"`
+	TokenKey   string    `json:"tokenKey"`
 }
 
-var appConfig *AppConfiguration
+var conf *AppConfiguration
 
 func init() {
 	file, _ := os.Open("config.json")
 	decoder := json.NewDecoder(file)
-	err := decoder.Decode(&appConfig)
+	err := decoder.Decode(&conf)
 	if err != nil {
 		fmt.Println("Оишбка чтения конфигурационного файла", err)
 		panic("Config Error")
 	}
 }
 
-func GetAppConfiguration() AppConfiguration {
-	return *appConfig
+func GetConfiguration() AppConfiguration {
+	return *conf
 }

@@ -2,5 +2,6 @@
   "dbUrl": "192.168.1.2",
   "dbName": "TruckMonitor",
   "dbUserName":"postgres",
-  "dbUserPassword": "postgres"
+  "dbUserPassword": "postgres",
+  "tokenKey": "37FjfjU7vka80OU3r520Yy2T7h0p7h7AM"
 }
