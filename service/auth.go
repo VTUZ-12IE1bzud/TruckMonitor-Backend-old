@@ -3,14 +3,20 @@ package service
 import (
 	"net/http"
 	"gopkg.in/gin-gonic/gin.v1"
-	"gopkg.in/validator.v2"
+	"gopkg.in/go-playground/validator.v9"
 	"TruckMonitor-Backend/api"
 	"TruckMonitor-Backend/token"
 )
 
 type SignInValid struct {
-	Email    string 	`validate:"regex=^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"`
-	Password string     `validate:"nonzero"`
+	Email    string 	`validate:"required,email"`
+	Password string     `validate:"required"`
+}
+
+var validate *validator.Validate
+
+func init() {
+	validate = validator.New()
 }
 
 func (resource *Resource) AuthRequiredMiddleware() gin.HandlerFunc {
@@ -34,8 +40,7 @@ func (resource *Resource) SighIn(context *gin.Context) {
 
 	// Validation
 	valid := SignInValid{Email: email, Password: password}
-	err := validator.Validate(valid)
-	if err != nil {
+	if err := validate.Struct(valid); err != nil {
 		context.JSON(http.StatusBadRequest, api.NewError(err.Error()))
 		return
 	}
