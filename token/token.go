@@ -2,7 +2,6 @@ package token
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"TruckMonitor-Backend/config"
 	"TruckMonitor-Backend/model"
 	"errors"
 )
@@ -31,7 +30,7 @@ type (
 var key []byte
 
 func init() {
-	key = []byte(config.GetConfiguration().TokenKey)
+	key = []byte("37FjfjU7vka80OU3r520Yy2T7h0p7h7AM")
 }
 
 /** Создать токен. */
@@ -45,7 +44,6 @@ func (user *UserToken) Create() (string, error) {
 	return newTokenString, err
 }
 
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUcnVja01vbml0b3IifQ.nCuOoKkNVhQjsHjktCf4GNpNiqjw-ThPGu1iG_OwZyc
 /** Разобрать токен. */
 func Parse(tokenString string) (*DataToken, error) {
 	userToken, err := jwt.ParseWithClaims(tokenString, &claims{}, func(token *jwt.Token) (interface{}, error) {

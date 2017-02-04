@@ -3,6 +3,7 @@ package service
 import (
 	"gopkg.in/gin-gonic/gin.v1"
 	"TruckMonitor-Backend/psql"
+	"TruckMonitor-Backend/env"
 )
 
 type (
@@ -33,5 +34,5 @@ func (app *AppService) Run() {
 			authorized.GET("/me", resource.GetMe)
 		}
 	}
-	api.Run(":8080")
+	api.Run(env.ServiceHost)
 }

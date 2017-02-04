@@ -4,8 +4,8 @@ import (
 	_ "github.com/lib/pq"
 	"database/sql"
 	"fmt"
-	"TruckMonitor-Backend/config"
 	"io/ioutil"
+	"TruckMonitor-Backend/env"
 )
 
 type DB struct {
@@ -15,8 +15,8 @@ type DB struct {
 /** Подключение к БД. */
 func Connection() *DB {
 	// Конфигурация.
-	conf := config.GetConfiguration()
-	var connectionString = fmt.Sprintf("host=%s port=5432 user=%s password=%s dbname=%s sslmode=disable", conf.DBUrl, conf.DBUser, conf.DBPassword, conf.DBName)
+	var connectionString = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		env.DBHost, env.DBPort, env.DBUser, env.DBPassword, env.DBDatabase)
 
 	connection, err := sql.Open("postgres", connectionString)
 	if err != nil {
